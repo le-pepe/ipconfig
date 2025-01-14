@@ -2,10 +2,54 @@
 import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
+export const prerender = false
+
+const { headers } = Astro.request
+
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-	<Welcome />
+
+    <div class="max-w-5xl realtive overflow-x-auto">
+        <div class="flex justify-center mb-4">
+            <span class="text-3xl font-bold bg-yellow-400 text-pink-600 px-6 py-2 rounded-lg shadow-lg">
+                {Astro.clientAddress}
+            </span>
+        </div>
+
+        <table class="w-full table-auto border-collapse border border-gray-300 w-full text-left text-sm">
+                <tbody>
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2 font-medium">User Agent</td>
+                    <td class="border border-gray-300 px-4 py-2">{headers.get('user-agent')}</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2 font-medium">Language</td>
+                    <td class="border border-gray-300 px-4 py-2">{headers.get('accept-language')}</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2 font-medium">Referer</td>
+                    <td class="border border-gray-300 px-4 py-2">{headers.get('referer') || 'N/A'}</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2 font-medium">Method</td>
+                    <td class="border border-gray-300 px-4 py-2">{Astro.request.method}</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2 font-medium">Encoding</td>
+                    <td class="border border-gray-300 px-4 py-2">{headers.get('accept-encoding')}</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2 font-medium">MIME Type</td>
+                    <td class="border border-gray-300 px-4 py-2">{headers.get('accept')}</td>
+                </tr>
+                </tbody>
+            </table>
+
+
+    </div>
+
+
 </Layout>
