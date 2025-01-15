@@ -1,57 +1,60 @@
 ---
-import { Icon } from "astro-icon/components";
-import { ThemeSwitch } from "astro-color-scheme";
+import {Icon} from "astro-icon/components";
+import {ThemeSwitch} from "astro-color-scheme";
 ---
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<!-- SEO Optimized Title -->
-		<title>My IP - Check Your Public IP Address Instantly</title>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <meta name="generator" content={Astro.generator}/>
+    <!-- SEO Optimized Title -->
+    <title>My IP - Check Your Public IP Address Instantly</title>
 
-		<!-- SEO Meta Description -->
-		<meta name="description" content="Quickly find your public IP address with our easy-to-use tool. Compatible with all devices." />
+    <!-- SEO Meta Description -->
+    <meta name="description"
+          content="Quickly find your public IP address with our easy-to-use tool. Compatible with all devices."/>
 
-		<!-- Keywords for SEO -->
-		<meta name="keywords" content="my IP, public IP address, IP lookup, IP checker, find my IP" />
+    <!-- Keywords for SEO -->
+    <meta name="keywords" content="my IP, public IP address, IP lookup, IP checker, find my IP"/>
 
-		<!-- Author -->
-		<meta name="author" content="@le-pepe" />
+    <!-- Author -->
+    <meta name="author" content="@le-pepe"/>
 
-		<!-- Robots Meta Tag -->
-		<meta name="robots" content="index, follow" />
-	</head>
-	<body class="bg-amber-100 dark:bg-gray-900 dark:text-white min-h-screen w-full">
-	<nav class="text-right me-4 my-4">
-		<ThemeSwitch strategy="button">
-			<button>
-				<span class="sr-only">Toggle Theme</span>
-				<Icon class="dark:hidden" name="sun" size="24"/>
-				<Icon class="hidden dark:block" name="moon" size="24" />
-			</button>
-		</ThemeSwitch>
-	</nav>
-		<div class="flex justify-center items-center h-full">
-			<slot />
-		</div>
-		<div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-xs text-gray-500 flex items-center space-x-4">
-			<span class="text-balance">© 2025 created by @le-pepe</span>
-			<!-- Icon links -->
-			<a href="https://x.com/LePepeDev" target="_blank" rel="noopener noreferrer" class="hover:text-gray-900 dark:hover:text-white hover:scale-150 transition">
-				<!-- SVG for X -->
-				<svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 1200 1227" fill="currentColor">
-					<path d="M714.163 519.284 1160.89 0h-105.86L667.137 450.887 357.328 0H0l468.492 681.821L0 1226.37h105.866l409.625-476.152 327.181 476.152H1200L714.137 519.284h.026ZM569.165 687.828l-47.468-67.894-377.686-540.24h162.604l304.797 435.991 47.468 67.894 396.2 566.721H892.476L569.165 687.854v-.026Z"/>
-				</svg>
-			</a>
-			<a href="https://github.com/le-pepe" target="_blank" rel="noopener noreferrer" class="hover:text-gray-900 dark:hover:text-white hover:scale-150 transition">
-				<!-- SVG for GitHub -->
-				<svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" fill="currentColor">
-					<path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.293 9.39 7.87 10.91.575.11.786-.246.786-.546 0-.268-.01-1.145-.016-2.077-3.2.695-3.88-1.54-3.88-1.54-.523-1.33-1.277-1.686-1.277-1.686-1.043-.714.08-.7.08-.7 1.154.08 1.76 1.184 1.76 1.184 1.027 1.758 2.695 1.249 3.354.956.104-.744.402-1.25.73-1.537-2.553-.291-5.235-1.277-5.235-5.682 0-1.255.448-2.282 1.184-3.088-.118-.292-.512-1.464.114-3.053 0 0 .964-.308 3.162 1.175a10.98 10.98 0 0 1 2.884-.388c.978.004 1.964.13 2.884.388 2.198-1.483 3.162-1.175 3.162-1.175.628 1.589.234 2.76.116 3.053.737.806 1.184 1.833 1.184 3.088 0 4.414-2.686 5.387-5.25 5.673.412.353.776 1.045.776 2.106 0 1.522-.014 2.75-.014 3.122 0 .302.206.662.794.546A10.45 10.45 0 0 0 23.5 12c0-6.27-5.23-11.5-11.5-11.5z"/>
-				</svg>
-			</a>
-		</div>
-	</body>
+    <!-- Robots Meta Tag -->
+    <meta name="robots" content="index, follow"/>
+</head>
+<body class="bg-amber-100 dark:bg-gray-900 dark:text-white min-h-screen w-full grid grid-cols-1 grid-rows-12">
+<nav class="text-right me-4 my-4">
+    <ThemeSwitch strategy="button">
+        <button>
+            <span class="sr-only">Toggle Theme</span>
+            <Icon class="dark:hidden" name="sun" size="24"/>
+            <Icon class="hidden dark:block" name="moon" size="24"/>
+        </button>
+    </ThemeSwitch>
+</nav>
+<div class="flex flex-col justify-center items-center row-span-10 overflow-x-auto relative">
+    <slot/>
+</div>
+<div class="text-xs text-gray-500 flex justify-center items-center space-x-4 row-start-12">
+    <span class="text-balance">© 2025 created by @le-pepe</span>
+    <!-- Icon links -->
+    <a href="https://x.com/LePepeDev" target="_blank" rel="noopener noreferrer"
+       class="hover:text-gray-900 dark:hover:text-white hover:scale-150 transition">
+        <!-- SVG for X -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 1200 1227" fill="currentColor">
+            <path d="M714.163 519.284 1160.89 0h-105.86L667.137 450.887 357.328 0H0l468.492 681.821L0 1226.37h105.866l409.625-476.152 327.181 476.152H1200L714.137 519.284h.026ZM569.165 687.828l-47.468-67.894-377.686-540.24h162.604l304.797 435.991 47.468 67.894 396.2 566.721H892.476L569.165 687.854v-.026Z"/>
+        </svg>
+    </a>
+    <a href="https://github.com/le-pepe" target="_blank" rel="noopener noreferrer"
+       class="hover:text-gray-900 dark:hover:text-white hover:scale-150 transition">
+        <!-- SVG for GitHub -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.293 9.39 7.87 10.91.575.11.786-.246.786-.546 0-.268-.01-1.145-.016-2.077-3.2.695-3.88-1.54-3.88-1.54-.523-1.33-1.277-1.686-1.277-1.686-1.043-.714.08-.7.08-.7 1.154.08 1.76 1.184 1.76 1.184 1.027 1.758 2.695 1.249 3.354.956.104-.744.402-1.25.73-1.537-2.553-.291-5.235-1.277-5.235-5.682 0-1.255.448-2.282 1.184-3.088-.118-.292-.512-1.464.114-3.053 0 0 .964-.308 3.162 1.175a10.98 10.98 0 0 1 2.884-.388c.978.004 1.964.13 2.884.388 2.198-1.483 3.162-1.175 3.162-1.175.628 1.589.234 2.76.116 3.053.737.806 1.184 1.833 1.184 3.088 0 4.414-2.686 5.387-5.25 5.673.412.353.776 1.045.776 2.106 0 1.522-.014 2.75-.014 3.122 0 .302.206.662.794.546A10.45 10.45 0 0 0 23.5 12c0-6.27-5.23-11.5-11.5-11.5z"/>
+        </svg>
+    </a>
+</div>
+</body>
 </html>
