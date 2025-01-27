@@ -7,9 +7,19 @@ import node from '@astrojs/node';
 
 import icon from 'astro-icon';
 
+import partytown from '@astrojs/partytown';
+
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind(), icon()],
+  integrations: [
+      tailwind(),
+      icon(),
+      partytown({
+        config: {
+          forward: ["dataLayer.push"]
+        }
+      })
+  ],
   output: 'server',
   adapter: node({
     mode: 'standalone'
