@@ -13,8 +13,6 @@ const requestDetails = [
     ['Method', Astro.request.method],
     ['Encoding', headers.get('accept-encoding') ?? 'No disponible'],
     ['MIME', headers.get('accept') ?? 'No disponible'],
-    ['X-Forwarded-For', headers.get('x-forwarded-for') ?? 'No disponible'],
-    ['X-Real-Ip', headers.get('x-real-ip') ?? 'No disponible'],
 ];
 ---
 
