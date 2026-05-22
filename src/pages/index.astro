@@ -1,10 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getClientIpFromHeaders } from '../lib/client-ip';
 
 const { headers } = Astro.request;
 // export const prerender = false;
 
-const clientIp = Astro.clientAddress ?? 'No disponible';
+const clientIp = getClientIpFromHeaders(headers, Astro.clientAddress);
 const requestDetails = [
     ['User Agent', headers.get('user-agent') ?? 'No disponible'],
     ['Language', headers.get('accept-language') ?? 'No disponible'],
@@ -12,6 +13,8 @@ const requestDetails = [
     ['Method', Astro.request.method],
     ['Encoding', headers.get('accept-encoding') ?? 'No disponible'],
     ['MIME', headers.get('accept') ?? 'No disponible'],
+    ['X-Forwarded-For', headers.get('x-forwarded-for') ?? 'No disponible'],
+    ['X-Real-Ip', headers.get('x-real-ip') ?? 'No disponible'],
 ];
 ---
 
