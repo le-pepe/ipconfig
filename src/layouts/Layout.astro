@@ -1,33 +1,36 @@
 ---
-import {Icon} from "astro-icon/components";
-import {ThemeSwitch} from "astro-color-scheme";
+import { Icon } from "astro-icon/components";
+import { ThemeSwitch } from "astro-color-scheme";
+
+const currentYear = new Date().getFullYear();
 ---
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width"/>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
     <meta name="generator" content={Astro.generator}/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet"
+    />
 
     <link rel="canonical" href="https://ip.lepepe.dev"/>
-
-    <!-- SEO Optimized Title -->
-    <title>My IP - Check Your Public IP Address Instantly</title>
-
-    <!-- SEO Meta Description -->
-    <meta name="description"
-          content="Quickly find your public IP address with our easy-to-use tool. Compatible with all devices."/>
-
-    <!-- Keywords for SEO -->
-    <meta name="keywords" content="my IP, public IP address, IP lookup, IP checker, find my IP"/>
-
-    <!-- Author -->
+    <title>What Is My IP | Check Your Public IP Address</title>
+    <meta
+        name="description"
+        content="Check your public IP address instantly and review useful request header details."
+    />
+    <meta
+        name="keywords"
+        content="what is my ip, public ip address, ip lookup, ip checker, find my ip"
+    />
     <meta name="author" content="@le-pepe"/>
-
-    <!-- Robots Meta Tag -->
     <meta name="robots" content="index, follow"/>
-    <!-- Google Tag Manager -->
+
     <script type="text/partytown">
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -35,8 +38,6 @@ import {ThemeSwitch} from "astro-color-scheme";
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-PNFWXNJL');
     </script>
-    <!-- End Google Tag Manager -->
-    <!-- Google tag (gtag.js) -->
     <script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-XPH9X2G2T7"></script>
     <script type="text/partytown">
         window.dataLayer = window.dataLayer || [];
@@ -47,46 +48,181 @@ import {ThemeSwitch} from "astro-color-scheme";
 
         gtag('config', 'G-XPH9X2G2T7');
     </script>
+
+    <style is:global>
+        :root {
+            --bg: #efe7db;
+            --bg-accent: rgba(214, 120, 57, 0.18);
+            --surface: rgba(255, 251, 245, 0.72);
+            --surface-strong: rgba(255, 248, 238, 0.9);
+            --border: rgba(72, 49, 34, 0.18);
+            --text: #1f1813;
+            --muted: #67584c;
+            --accent: #bb4f19;
+            --shadow: 0 24px 80px rgba(77, 49, 31, 0.16);
+        }
+
+        :root.dark {
+            --bg: #11161a;
+            --bg-accent: rgba(56, 164, 255, 0.18);
+            --surface: rgba(12, 19, 24, 0.74);
+            --surface-strong: rgba(17, 24, 29, 0.9);
+            --border: rgba(139, 183, 214, 0.2);
+            --text: #edf3f7;
+            --muted: #9db1bf;
+            --accent: #64c9ff;
+            --shadow: 0 28px 90px rgba(0, 0, 0, 0.32);
+        }
+
+        html {
+            background: var(--bg);
+            color: var(--text);
+            font-family: "Archivo", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, var(--bg-accent), transparent 26rem),
+                radial-gradient(circle at bottom right, rgba(0, 0, 0, 0.06), transparent 30rem),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0)),
+                var(--bg);
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.4;
+            background-image:
+                linear-gradient(rgba(127, 96, 69, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(127, 96, 69, 0.1) 1px, transparent 1px);
+            background-size: 32px 32px;
+            mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 90%);
+        }
+
+        .app-shell {
+            min-height: 100vh;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .app-nav {
+            display: flex;
+            justify-content: flex-end;
+            padding: 1.4rem 1.4rem 0;
+        }
+
+        .theme-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.8rem;
+            height: 2.8rem;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(18px);
+            transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-1px);
+            border-color: var(--accent);
+        }
+
+        .app-main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 1.2rem 2rem;
+        }
+
+        .app-footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            padding: 0 1.2rem 1.4rem;
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+
+        .app-footer a {
+            color: inherit;
+            transition: color 180ms ease, transform 180ms ease;
+        }
+
+        .app-footer a:hover {
+            color: var(--text);
+            transform: translateY(-1px);
+        }
+
+        .mono {
+            font-family: "IBM Plex Mono", monospace;
+        }
+
+        @media (max-width: 640px) {
+            .app-nav {
+                padding: 1rem 1rem 0;
+            }
+
+            .app-main {
+                padding: 0.5rem 0.85rem 1.5rem;
+            }
+
+            .app-footer {
+                gap: 0.75rem;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
 </head>
-<body class="bg-amber-100 dark:bg-gray-900 dark:text-white min-h-screen w-full grid grid-cols-1 grid-rows-12">
-<nav class="text-right me-4 my-4">
-    <ThemeSwitch strategy="button">
-        <button>
-            <span class="sr-only">Toggle Theme</span>
-            <Icon class="dark:hidden" name="sun" size="24"/>
-            <Icon class="hidden dark:block" name="moon" size="24"/>
-        </button>
-    </ThemeSwitch>
-</nav>
-<main class="flex flex-col justify-center items-center row-span-10 overflow-x-auto relative">
-    <slot/>
-</main>
-<footer class="text-xs text-gray-500 flex justify-center items-center space-x-4 row-start-12">
-    <span class="text-balance">© 2025 created by @le-pepe</span>
-    <!-- Icon links -->
-    <a href="https://x.com/LePepeDev" target="_blank" rel="noopener noreferrer"
-       class="hover:text-gray-900 dark:hover:text-white hover:scale-150 transition">
-        <!-- SVG for X -->
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 1200 1227" fill="currentColor">
-            <path d="M714.163 519.284 1160.89 0h-105.86L667.137 450.887 357.328 0H0l468.492 681.821L0 1226.37h105.866l409.625-476.152 327.181 476.152H1200L714.137 519.284h.026ZM569.165 687.828l-47.468-67.894-377.686-540.24h162.604l304.797 435.991 47.468 67.894 396.2 566.721H892.476L569.165 687.854v-.026Z"/>
-        </svg>
-    </a>
-    <a href="https://github.com/le-pepe" target="_blank" rel="noopener noreferrer"
-       class="hover:text-gray-900 dark:hover:text-white hover:scale-150 transition">
-        <!-- SVG for GitHub -->
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.293 9.39 7.87 10.91.575.11.786-.246.786-.546 0-.268-.01-1.145-.016-2.077-3.2.695-3.88-1.54-3.88-1.54-.523-1.33-1.277-1.686-1.277-1.686-1.043-.714.08-.7.08-.7 1.154.08 1.76 1.184 1.76 1.184 1.027 1.758 2.695 1.249 3.354.956.104-.744.402-1.25.73-1.537-2.553-.291-5.235-1.277-5.235-5.682 0-1.255.448-2.282 1.184-3.088-.118-.292-.512-1.464.114-3.053 0 0 .964-.308 3.162 1.175a10.98 10.98 0 0 1 2.884-.388c.978.004 1.964.13 2.884.388 2.198-1.483 3.162-1.175 3.162-1.175.628 1.589.234 2.76.116 3.053.737.806 1.184 1.833 1.184 3.088 0 4.414-2.686 5.387-5.25 5.673.412.353.776 1.045.776 2.106 0 1.522-.014 2.75-.014 3.122 0 .302.206.662.794.546A10.45 10.45 0 0 0 23.5 12c0-6.27-5.23-11.5-11.5-11.5z"/>
-        </svg>
-    </a>
-</footer>
+<body>
+<div class="app-shell">
+    <nav class="app-nav">
+        <ThemeSwitch strategy="button">
+            <button class="theme-toggle" type="button">
+                <span class="sr-only">Cambiar tema</span>
+                <Icon class="dark:hidden" name="sun" size="24"/>
+                <Icon class="hidden dark:block" name="moon" size="24"/>
+            </button>
+        </ThemeSwitch>
+    </nav>
+
+    <main class="app-main">
+        <slot/>
+    </main>
+
+    <footer class="app-footer">
+        <span>(c) {currentYear} creado por @le-pepe</span>
+        <a href="https://x.com/LePepeDev" target="_blank" rel="noopener noreferrer" aria-label="X de LePepe">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 1200 1227" fill="currentColor">
+                <path d="M714.163 519.284 1160.89 0h-105.86L667.137 450.887 357.328 0H0l468.492 681.821L0 1226.37h105.866l409.625-476.152 327.181 476.152H1200L714.137 519.284h.026ZM569.165 687.828l-47.468-67.894-377.686-540.24h162.604l304.797 435.991 47.468 67.894 396.2 566.721H892.476L569.165 687.854v-.026Z"/>
+            </svg>
+        </a>
+        <a href="https://github.com/le-pepe" target="_blank" rel="noopener noreferrer" aria-label="GitHub de LePepe">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.293 9.39 7.87 10.91.575.11.786-.246.786-.546 0-.268-.01-1.145-.016-2.077-3.2.695-3.88-1.54-3.88-1.54-.523-1.33-1.277-1.686-1.277-1.686-1.043-.714.08-.7.08-.7 1.154.08 1.76 1.184 1.76 1.184 1.027 1.758 2.695 1.249 3.354.956.104-.744.402-1.25.73-1.537-2.553-.291-5.235-1.277-5.235-5.682 0-1.255.448-2.282 1.184-3.088-.118-.292-.512-1.464.114-3.053 0 0 .964-.308 3.162 1.175a10.98 10.98 0 0 1 2.884-.388c.978.004 1.964.13 2.884.388 2.198-1.483 3.162-1.175 3.162-1.175.628 1.589.234 2.76.116 3.053.737.806 1.184 1.833 1.184 3.088 0 4.414-2.686 5.387-5.25 5.673.412.353.776 1.045.776 2.106 0 1.522-.014 2.75-.014 3.122 0 .302.206.662.794.546A10.45 10.45 0 0 0 23.5 12c0-6.27-5.23-11.5-11.5-11.5z"/>
+            </svg>
+        </a>
+    </footer>
+</div>
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2550224686561812"
         crossorigin="anonymous"></script>
-<!-- Google Tag Manager (noscript) -->
 <noscript>
     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PNFWXNJL"
-height="0" width="0" style="display:none;visibility:hidden">
+            height="0" width="0" style="display:none;visibility:hidden">
     </iframe>
 </noscript>
-<!-- End Google Tag Manager (noscript) -->
 </body>
 </html>
